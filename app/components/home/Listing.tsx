@@ -26,7 +26,6 @@ const StationList = () => {
   useEffect(() => {
     getStationList().then((res) => setData(res));
   }, []);
-  console.log("DEBUG STATION LIST, ", data);
   return (
     <>
       <h2>Daftar Terminal</h2>

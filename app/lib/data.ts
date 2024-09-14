@@ -29,12 +29,30 @@ export const getBusRoute = async () => {
     .then((res) => res.filter((item: any) => item.destination == "Malang"));
 };
 
-export const findBusRoute = async (origin: any, destination: any) => {
+export const findBusRoute = async (
+  origin: any,
+  destination: any,
+  operator: any
+) => {
   const query = `*[_type == "busRoute"]{_id,"operator": name->name,"busClass": busClass->name, "origin": origin->name, "destination": destination->name, price,"schedules": schedule[]{"busStop":busStop->name, time}}`;
   return await client.fetch(query, {}, { cache: "no-store" }).then((res) => {
-    return res.filter(
-      (item: any) => item.origin == origin && item.destination == destination
-    );
+    if (operator) {
+      return res.filter((item: any) => item.operator == operator);
+    } else if (origin && destination) {
+      return res.filter(
+        (item: any) => item.origin == origin && item.destination == destination
+      );
+    } else if (origin && origin && destination) {
+      return res.filter(
+        (item: any) =>
+          item.origin == origin &&
+          item.destination == destination &&
+          item.operator == operator
+      );
+    }
+    // return res.filter(
+    //   (item: any) => item.origin == origin && item.destination == destination
+    // );
   });
 };
 

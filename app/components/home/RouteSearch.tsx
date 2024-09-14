@@ -11,12 +11,8 @@ export const RouteSearch = () => {
 
   const onClick = () => {
     if (state.origin === state.destination) return null;
-    router.push(
-      "/schedule?origin=" + state.origin + "&destination=" + state.destination
-    );
+    router.push("/schedule");
   };
-
-  console.log(router);
   return (
     <>
       <Select

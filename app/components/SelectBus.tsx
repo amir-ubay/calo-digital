@@ -1,6 +1,7 @@
 "use client";
-import { RouteOptions } from "./RouteOptions";
-export const Select = ({
+import { BusOptions } from "./BusOptions";
+
+export const SelectBus = ({
   value,
   onChange,
   placeholder,
@@ -16,7 +17,7 @@ export const Select = ({
       value={value}
     >
       <option value={""}>{placeholder}</option>
-      <RouteOptions />
+      <BusOptions />
     </select>
   );
 };

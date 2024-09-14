@@ -1,14 +1,16 @@
 'use client';
 import React, { createContext, useReducer } from "react";
 
-const initialState = { origin: "", destination: "" };
+const initialState = { origin: "", destination: "", operator: "" };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "setOrigin":
-      return { ...state, origin: action.payload };
+      return { ...state, origin: action.payload, operator: "" };
     case "setDestination":
-      return { ...state, destination: action.payload };
+      return { ...state, destination: action.payload, operator: "" };
+    case "setOperator":
+      return { ...state, operator: action.payload }
     default:
       return state;
   }
