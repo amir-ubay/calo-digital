@@ -66,7 +66,7 @@ export const getCityList = async () => {
 };
 
 export const getBusList = async () => {
-  const query = `*[_type == "busName"]{_id, "operator": name, "logo": logo->url, "busClass": busClass[]->name}`;
+  const query = `*[_type == "busName"]{_id, "operator": name, "logo": logo.asset->url, "busClass": busClass[]->name}`;
   return await client.fetch(query, {}, { cache: "no-store" });
 };
 
