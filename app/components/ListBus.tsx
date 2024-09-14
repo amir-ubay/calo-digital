@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useContext } from "react";
+import { BusRouteContext } from "../lib/Context";
+import { useRouter } from "next/navigation";
 
 export const ListBus = ({ data }: any) => {
+  const router = useRouter();
+  const [state, dispatch] = useContext(BusRouteContext);
+
+  const onClick = (operator: any) => {
+    dispatch({ type: "setOperator", payload: operator });
+    router.push("/schedule");
+  };
   return (
     <>
       {data.map((item: any) => {
@@ -19,7 +29,7 @@ export const ListBus = ({ data }: any) => {
                 </ol>
               </div>
               <div id="price" className="col-span-1">
-                <p>Jadwal</p>
+                <p onClick={() => onClick(item.operator)}>Jadwal</p>
               </div>
             </div>
           </div>
