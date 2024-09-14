@@ -20,16 +20,21 @@ export const RouteSearch = () => {
         onChange={(e) =>
           dispatch({ type: "setOrigin", payload: e.target.value })
         }
-        placeholder="Kota Keberangkatan"
+        placeholder="pilih kota..."
+        label="Keberangkatan"
+        type="origin"
       />
       <Select
         value={state.destination}
         onChange={(e) =>
           dispatch({ type: "setDestination", payload: e.target.value })
         }
-        placeholder="Kota Tujuan"
+        placeholder="pilih kota..."
+        label="Tujuan"
+        type="destination"
       />
-      <Button onClick={onClick} />
+
+      <Button onClick={onClick} label="Cari Jadwal" />
     </>
   );
 };
