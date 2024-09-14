@@ -11,10 +11,7 @@ export default function Home() {
   return (
     <>
       {/* Container APP */}
-      <div
-        id="root-container"
-        className="sm:container sm:mx-auto min-h-screen p-8 sm:max-w-md bg-white rounded-2xl relative"
-      >
+      <div id="root-container" className="">
         <div
           id="bg-city"
           style={style}

@@ -6,6 +6,7 @@ import { ListStation } from "../ListStation";
 import { useState, useEffect } from "react";
 import { getBusList } from "../../lib/data";
 import { getStationList } from "../../lib/data";
+import { Input } from "../Input";
 
 const BusList = () => {
   const [data, setData] = useState<any>([]);
@@ -15,6 +16,7 @@ const BusList = () => {
   console.log("DEBUG TAB BUS LIST: ", data);
   return (
     <>
+      <Input placeholder="Cari operator bus..." />
       <ListBus data={data} />
     </>
   );
@@ -27,7 +29,7 @@ const StationList = () => {
   }, []);
   return (
     <>
-      <h2>Daftar Terminal</h2>
+      <Input placeholder="Cari terminal..." />
       <ListStation data={data} />
     </>
   );

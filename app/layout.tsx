@@ -30,7 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
-        <BusRouteProvider>{children}</BusRouteProvider>
+        <BusRouteProvider>
+          <div className="sm:container sm:mx-auto min-h-screen p-8 sm:max-w-md bg-white rounded-2xl relative">
+            {children}
+          </div>
+        </BusRouteProvider>
       </body>
       <PrelineScript />
     </html>
