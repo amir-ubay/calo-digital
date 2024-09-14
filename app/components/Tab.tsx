@@ -10,14 +10,14 @@ export const Tab = ({
   return (
     <div>
       <nav
-        className="flex gap-x-1"
+        className="flex gap-x-1 border-b border-dashed border-orange-600 mb-10"
         aria-label="Tabs"
         role="tablist"
         aria-orientation="horizontal"
       >
         <button
           type="button"
-          className="hs-tab-active:bg-blue-600 hs-tab-active:text-white hs-tab-active:hover:text-white hs-tab-active:dark:text-white py-3 px-4 text-center basis-0 grow inline-flex justify-center items-center gap-x-2 bg-transparent text-sm font-medium text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300 active"
+          className="hs-tab-active:bg-orange-600 hs-tab-active:text-white hs-tab-active:hover:text-white hs-tab-active:dark:text-white py-3 px-4 text-center basis-0 grow inline-flex justify-center items-center gap-x-2 bg-transparent text-sm font-medium text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600 rounded-t-lg disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300 active"
           id="equal-width-elements-item-1"
           aria-selected="true"
           data-hs-tab="#equal-width-elements-1"
@@ -28,7 +28,7 @@ export const Tab = ({
         </button>
         <button
           type="button"
-          className="hs-tab-active:bg-blue-600 hs-tab-active:text-white hs-tab-active:hover:text-white hs-tab-active:dark:text-white py-3 px-4 text-center basis-0 grow inline-flex justify-center items-center gap-x-2 bg-transparent text-sm font-medium text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
+          className="hs-tab-active:bg-orange-600 hs-tab-active:text-white hs-tab-active:hover:text-white hs-tab-active:dark:text-white py-3 px-4 text-center basis-0 grow inline-flex justify-center items-center gap-x-2 bg-transparent text-sm font-medium text-gray-500 hover:text-orange-600 focus:outline-none focus:text-orange-600 rounded-t-lg disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300 active"
           id="equal-width-elements-item-3"
           aria-selected="false"
           data-hs-tab="#equal-width-elements-3"

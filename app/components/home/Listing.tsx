@@ -12,10 +12,9 @@ const BusList = () => {
   useEffect(() => {
     getBusList().then((res) => setData(res));
   }, []);
-
+  console.log("DEBUG TAB BUS LIST: ", data);
   return (
     <>
-      <h1>Daftar Operator Bus</h1>
       <ListBus data={data} />
     </>
   );

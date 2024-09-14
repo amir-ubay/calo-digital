@@ -26,15 +26,6 @@ export default function Home() {
           <h1 className="text-4xl font-extrabold text-left p-4 text-gray-600">
             Calo Digital
           </h1>
-          {/* <div id="image-container" className="text-center">
-            <Image
-              src="/bus.png"
-              alt="Calo Digital Logo"
-              width={200}
-              height={200}
-              className="mx-auto pt-10"
-            />
-          </div> */}
         </div>
         {/* Route Search */}
         <div

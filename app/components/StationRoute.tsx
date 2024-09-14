@@ -66,17 +66,15 @@ export const StationRoute = ({ location }: any) => {
       setToData(uniqueData);
     });
   }, []);
-  console.log("DEBUG FROM DATA", fromData);
-  console.log("DEBUG TO DATA", toData);
   return (
     <>
       <div>
         <p>Kebarangkatan dari: {location}</p>
-        {fromData.map((data: any) => {
+        {fromData.map((data: any, index: any) => {
           return (
             <p
               onClick={() => findRoute(data.origin, data.destination)}
-              key={data.origin}
+              key={data.origin + index}
             >
               <span>{data.origin}</span> - <span>{data.destination}</span>
             </p>
@@ -85,11 +83,11 @@ export const StationRoute = ({ location }: any) => {
       </div>
       <div>
         <p>Tujuan ke: {location}</p>
-        {toData.map((data: any) => {
+        {toData.map((data: any, index: any) => {
           return (
             <p
               onClick={() => findRoute(data.origin, data.destination)}
-              key={data.origin}
+              key={data.origin + index}
             >
               <span>{data.origin}</span> - <span>{data.destination}</span>
             </p>

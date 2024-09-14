@@ -9,7 +9,7 @@ export const RouteOptions = () => {
   return (
     <>
       {data.map((item: any) => (
-        <option key={item.name} value={item.name} className="m-20">
+        <option key={item._id} value={item.name} className="m-20">
           {item.name}
         </option>
       ))}

@@ -61,7 +61,7 @@ export const findBusRoute = async (
 };
 
 export const getCityList = async () => {
-  const query = `*[_type == "city"]{name}`;
+  const query = `*[_type == "city"]{_id, name}`;
   return await client.fetch(query, {}, { cache: "no-store" });
 };
 
