@@ -5,7 +5,7 @@ export const ListStation = ({ data }: any) => {
     <>
       {data.map((item: any) => {
         return (
-          <div id="item-route">
+          <div id="item-route" key={item.name}>
             <div className="grid grid-cols-3 shadow-sm border rounded-xl">
               <div id="bus-details" className="col-span-1">
                 <p>Terminal {item.name}</p>
