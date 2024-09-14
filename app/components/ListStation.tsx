@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { StationRoute } from "./StationRoute";
 
 export const ListStation = ({ data }: any) => {
   return (
@@ -23,6 +25,7 @@ export const ListStation = ({ data }: any) => {
                 <p>Trayek</p>
               </div>
             </div>
+            <StationRoute location={item.city} />
           </div>
         );
       })}

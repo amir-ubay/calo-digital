@@ -24,8 +24,6 @@ export default function Page() {
       }
     );
   }, [state]);
-
-  console.log("DEBUG PAGE SCHEDULE: ", state);
   return (
     <>
       <BackButton />

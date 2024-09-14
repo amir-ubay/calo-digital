@@ -38,6 +38,10 @@ export const findBusRoute = async (
   return await client.fetch(query, {}, { cache: "no-store" }).then((res) => {
     if (operator) {
       return res.filter((item: any) => item.operator == operator);
+    } else if (origin && !destination) {
+      return res.filter((item: any) => item.origin == origin);
+    } else if (!origin && destination) {
+      return res.filter((item: any) => item.destination == destination);
     } else if (origin && destination) {
       return res.filter(
         (item: any) => item.origin == origin && item.destination == destination
