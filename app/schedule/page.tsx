@@ -1,6 +1,6 @@
 "use client";
 import { ListRoute } from "../components/ListRoute";
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { BusRouteContext } from "../lib/Context";
 import { useState, useEffect } from "react";
 import { findBusRoute } from "../lib/data";
@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Barier, Home } from "../components/Icons";
 import { HomeButton } from "../components/HomeButton";
+import { Skeleton } from "../components/Skeleton";
 
 const style = {
   backgroundColor: "#ffffff",
@@ -91,16 +92,18 @@ export default function Page() {
         {data ? (
           data.length > 0 ? (
             data.map((item: any, index: number, arr: Array<any>) => (
-              <ListRoute
-                key={item._id}
-                logo={item.logo}
-                operator={item.operator}
-                busClass={item.busClass}
-                origin={item.origin}
-                destination={item.destination}
-                price={item.price}
-                schedule={item.schedules}
-              />
+              <Suspense key={index} fallback={<Skeleton />}>
+                <ListRoute
+                  key={item._id}
+                  logo={item.logo}
+                  operator={item.operator}
+                  busClass={item.busClass}
+                  origin={item.origin}
+                  destination={item.destination}
+                  price={item.price}
+                  schedule={item.schedules}
+                />
+              </Suspense>
             ))
           ) : (
             <div className="w-full text-center mt-12">

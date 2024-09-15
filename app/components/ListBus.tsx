@@ -5,14 +5,18 @@ import { BusRouteContext } from "../lib/Context";
 import { useRouter } from "next/navigation";
 import { Badge1, Badge2, Badge3, Badge4, Badge5, Badge6 } from "./Badges";
 import { Calendar } from "./Icons";
+import { useSearchParams } from "next/navigation";
 
 export const ListBus = ({ data }: any) => {
   const router = useRouter();
   const [state, dispatch] = useContext(BusRouteContext);
+  const searchParams = useSearchParams();
 
   const onClick = (operator: any) => {
     dispatch({ type: "setOperator", payload: operator });
-    router.push("/schedule");
+    const params = new URLSearchParams(searchParams);
+    params.set("operator", operator);
+    router.push("/schedule" + "?" + params.toString());
   };
   return (
     <>

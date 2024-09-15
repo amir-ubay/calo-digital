@@ -6,6 +6,7 @@ import { BusRouteContext } from "../lib/Context";
 import { useRouter } from "next/navigation";
 import { RightArrow } from "./Icons";
 import { clsx } from "clsx";
+import { useSearchParams } from "next/navigation";
 
 export const StationRoute = ({
   location,
@@ -20,11 +21,15 @@ export const StationRoute = ({
 
   const [state, dispatch] = useContext(BusRouteContext);
   const userouter = useRouter();
+  const searchParams = useSearchParams();
 
   const findRoute = (origin: any, destination: any) => {
     dispatch({ type: "setOrigin", payload: origin });
     dispatch({ type: "setDestination", payload: destination });
-    userouter.push("/schedule");
+    const params = new URLSearchParams(searchParams);
+    params.set("origin", origin);
+    params.set("destination", destination);
+    userouter.push("/schedule" + "?" + params.toString());
   };
   // get route
   useEffect(() => {
@@ -85,8 +90,8 @@ export const StationRoute = ({
       className={clsx(
         "w-[calc(100%-2rem)] bg-gray-200  p-4 mx-auto rounded-b-md transition-all shadow-lg",
         {
-          "h-full, block": display,
-          "h-0, hidden": display,
+          "h-full, block": display === true,
+          "h-0, hidden": display === false,
         }
       )}
     >
