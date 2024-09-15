@@ -102,8 +102,8 @@ export const ListRoute = ({
                       key={item.busStop + item.time}
                       className="odd:bg-gray-100 even:bg-gray-200 text-lg font-bold text-gray-600 last:rounded-b-lg"
                     >
-                      <td className="p-4">{item.busStop}</td>
-                      <td>{item.time}</td>
+                      <td className="p-4 w-1/2">{item.busStop}</td>
+                      <td className="p-4 w-1/2">{item.time}</td>
                     </tr>
                   ))}
                 </tbody>
