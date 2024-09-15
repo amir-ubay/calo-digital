@@ -49,7 +49,7 @@ export const ListStation = ({ data }: any) => {
                 </div>
               </div>
             </div>
-            {display === index && <StationRoute location={item.city} />}
+            <StationRoute location={item.city} display={display === index} />
           </section>
         );
       })}

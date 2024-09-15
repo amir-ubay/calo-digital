@@ -7,7 +7,13 @@ import { useRouter } from "next/navigation";
 import { RightArrow } from "./Icons";
 import { clsx } from "clsx";
 
-export const StationRoute = ({ location }: { location: any }) => {
+export const StationRoute = ({
+  location,
+  display,
+}: {
+  location: any;
+  display: boolean;
+}) => {
   const [fromData, setFromData] = useState<any>([]);
   const [toData, setToData] = useState<any>([]);
   const [data, setData] = useState<any>([]);
@@ -79,8 +85,8 @@ export const StationRoute = ({ location }: { location: any }) => {
       className={clsx(
         "w-[calc(100%-2rem)] bg-gray-200  p-4 mx-auto rounded-b-md transition-all shadow-lg",
         {
-          "h-full, block": true,
-          "h-0, hidden": false,
+          "h-full, block": display,
+          "h-0, hidden": display,
         }
       )}
     >
