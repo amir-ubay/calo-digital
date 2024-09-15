@@ -6,7 +6,6 @@ export const BusOptions = () => {
   useEffect(() => {
     getBusList().then((res) => setData(res));
   }, []);
-  console.log(data);
   return (
     <>
       {data.map((item: any) => (

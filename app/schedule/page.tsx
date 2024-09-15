@@ -4,9 +4,12 @@ import { useContext } from "react";
 import { BusRouteContext } from "../lib/Context";
 import { useState, useEffect } from "react";
 import { findBusRoute } from "../lib/data";
-import { TitlePage } from "../components/TitlePage";
 import { BackButton } from "../components/BackButton";
 import { Filter } from "../components/schedule/Filter";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { Barier, Home } from "../components/Icons";
+import { HomeButton } from "../components/HomeButton";
 
 const style = {
   backgroundColor: "#ffffff",
@@ -14,21 +17,57 @@ const style = {
 };
 
 export default function Page() {
-  const [state] = useContext(BusRouteContext);
-  const origin = state.origin;
-  const destination = state.destination;
-
-  const [title, setTitle] = useState({});
+  const [state, dispatch] = useContext(BusRouteContext);
   const [data, setData] = useState<any>([]);
+  const [query, setQuery] = useState<any>({});
+  const [reFetch, setReFetch] = useState(false);
 
-  useEffect(() => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const reSearch = () => {
+    // submit manually using state
+    const params = new URLSearchParams(searchParams);
+    if (state.origin) {
+      params.set("origin", state.origin);
+    } else {
+      params.delete("origin");
+    }
+    if (state.destination) {
+      params.set("destination", state.destination);
+    } else {
+      params.delete("destination");
+    }
+    if (state.operator) {
+      params.set("operator", state.operator);
+    } else {
+      params.delete("operator");
+    }
+    router.push("/schedule?" + params.toString());
+    router.refresh();
     findBusRoute(state.origin, state.destination, state.operator).then(
       (res) => {
         setData(res);
-        setTitle({ origin, destination });
       }
     );
-  }, [state]);
+  };
+
+  useEffect(() => {
+    // get parameter from query
+    const origin = searchParams.get("origin");
+    const destination = searchParams.get("destination");
+    const operator = searchParams.get("operator");
+
+    if (origin) dispatch({ type: "setOrigin", payload: origin });
+    if (destination) dispatch({ type: "setDestination", payload: destination });
+    if (operator) dispatch({ type: "setOperator", payload: operator });
+
+    console.log("DEBUG: ", origin, destination, operator);
+    findBusRoute(origin, destination, operator).then((res) => {
+      setData(res);
+    });
+  }, []);
+  console.log("MAIN DATA, ", data);
   return (
     <>
       <div
@@ -43,27 +82,41 @@ export default function Page() {
         {/* Title */}
         <div id="home-title" className="min-h-[calc(5vh)] mb-10 z-20 relative">
           <span id="title-icon"></span>
-          <BackButton />
           <h1 className="text-4xl font-extrabold text-left p-4 text-gray-600">
             Jadwal Bus
           </h1>
+          <HomeButton />
         </div>
-        <Filter />
+        <Filter onClick={reSearch} />
         {data ? (
-          data.map((item: any, index: number, arr: Array<any>) => (
-            <ListRoute
-              key={item._id}
-              logo={item.logo}
-              operator={item.operator}
-              busClass={item.busClass}
-              origin={item.origin}
-              destination={item.destination}
-              price={item.price}
-              schedule={item.schedules}
-            />
-          ))
+          data.length > 0 ? (
+            data.map((item: any, index: number, arr: Array<any>) => (
+              <ListRoute
+                key={item._id}
+                logo={item.logo}
+                operator={item.operator}
+                busClass={item.busClass}
+                origin={item.origin}
+                destination={item.destination}
+                price={item.price}
+                schedule={item.schedules}
+              />
+            ))
+          ) : (
+            <div className="w-full text-center mt-12">
+              <Barier />
+              <p className="text-3xl font-bold text-gray-600">
+                Tidak ada jadwal bus
+              </p>
+            </div>
+          )
         ) : (
-          <p>Jadwal belum ditemukan</p>
+          <div className="w-full text-center mt-12">
+            <Barier />
+            <p className="text-3xl font-bold text-gray-600">
+              Tidak ada jadwal bus
+            </p>
+          </div>
         )}
       </div>
     </>

@@ -34,7 +34,7 @@ export const ListRoute = ({
     <>
       <section id="route" className="mt-12">
         <>
-          <div id="item-route" key={operator} className="shadow-xl rounded-xl">
+          <div id="item-route" key={operator} className="rounded-xl">
             <div className="grid grid-rows-1 grid-cols-2 border border-grey-400 rounded-xl p-4 bg-gray-100 divide-dashed divide-x-2 divide-gray-300 relative">
               <div
                 id="bus-name"

@@ -4,15 +4,21 @@ import { Button } from "../Button";
 import { useContext, useEffect } from "react";
 import { BusRouteContext } from "../../lib/Context";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export const RouteSearch = () => {
   const [state, dispatch] = useContext(BusRouteContext);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const onClick = () => {
     if (state.origin === state.destination) return null;
-    router.push("/schedule");
+    const params = new URLSearchParams(searchParams);
+    params.set("origin", state.origin);
+    params.set("destination", state.destination);
+    router.push("/schedule?" + params.toString());
   };
+
   return (
     <>
       <Select

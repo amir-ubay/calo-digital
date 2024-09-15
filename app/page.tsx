@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { RouteSearch } from "./components/home/RouteSearch";
 import { Listing } from "./components/home/Listing";
+import { Button } from "./components/Button";
 
 const style = {
   backgroundColor: "#ffffff",

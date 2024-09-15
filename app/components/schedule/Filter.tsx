@@ -4,8 +4,9 @@ import { SelectBus } from "../SelectBus";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { BusRouteContext } from "../../lib/Context";
+import { Button } from "../Button";
 
-export const Filter = () => {
+export const Filter = ({ onClick }: { onClick: () => void }) => {
   const [state, dispatch] = useContext(BusRouteContext);
 
   return (
@@ -43,6 +44,7 @@ export const Filter = () => {
           type="operator"
         />
       </div>
+      <Button onClick={onClick} label="Cari Jadwal" />
     </div>
   );
 };

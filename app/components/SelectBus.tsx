@@ -22,9 +22,9 @@ export const SelectBus = ({
       <select
         className="py-3 px-12 pe-9 block w-full border-gray-200 border bg-white text-gray-600 rounded-lg text-sm font-bold active:border-orange-500 hover:border-orange-500 focus:outline-none focus:border-orange-500 focus:ring-orange-500 disabled:opacity-50 disabled:pointer-events-none transition-all"
         onChange={onChange}
-        value={value}
+        value={value?.toString()}
       >
-        <option value={""}>{placeholder}</option>
+        <option value={"all"}>{placeholder}</option>
         <BusOptions />
       </select>
       <div className="absolute inset-y-0 left-2 flex items-center mt-6 text-gray-600">
