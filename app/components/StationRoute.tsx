@@ -4,10 +4,13 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { BusRouteContext } from "../lib/Context";
 import { useRouter } from "next/navigation";
+import { RightArrow } from "./Icons";
+import { clsx } from "clsx";
 
-export const StationRoute = ({ location }: any) => {
+export const StationRoute = ({ location }: { location: any }) => {
   const [fromData, setFromData] = useState<any>([]);
   const [toData, setToData] = useState<any>([]);
+  const [data, setData] = useState<any>([]);
 
   const [state, dispatch] = useContext(BusRouteContext);
   const userouter = useRouter();
@@ -17,7 +20,7 @@ export const StationRoute = ({ location }: any) => {
     dispatch({ type: "setDestination", payload: destination });
     userouter.push("/schedule");
   };
-
+  // get route
   useEffect(() => {
     findBusRoute(location, "", "").then((res) => {
       const filtered = res.map((item: any) => {
@@ -66,34 +69,40 @@ export const StationRoute = ({ location }: any) => {
       setToData(uniqueData);
     });
   }, []);
+  // Combine data
+  useEffect(() => {
+    setData([...fromData, ...toData]);
+  }, [fromData, toData]);
   return (
-    <>
-      <div>
-        <p>Kebarangkatan dari: {location}</p>
-        {fromData.map((data: any, index: any) => {
-          return (
-            <p
-              onClick={() => findRoute(data.origin, data.destination)}
-              key={data.origin + index}
-            >
-              <span>{data.origin}</span> - <span>{data.destination}</span>
-            </p>
-          );
-        })}
-      </div>
-      <div>
-        <p>Tujuan ke: {location}</p>
-        {toData.map((data: any, index: any) => {
-          return (
-            <p
-              onClick={() => findRoute(data.origin, data.destination)}
-              key={data.origin + index}
-            >
-              <span>{data.origin}</span> - <span>{data.destination}</span>
-            </p>
-          );
-        })}
-      </div>
-    </>
+    <section
+      id="trayek-list"
+      className={clsx(
+        "w-[calc(100%-2rem)] bg-green-100 mx-auto rounded-b-md transition-all",
+        {
+          "h-full, block": true,
+          "h-0, hidden": false,
+        }
+      )}
+    >
+      <table className="w-full text-center">
+        <tbody>
+          {data.map((data: any, index: any) => {
+            return (
+              <tr
+                onClick={() => findRoute(data.origin, data.destination)}
+                key={data.origin + index}
+                className="cursor-pointer hover:text-orange-600 hover:underline border-b border-orange-400 border-dashed last:border-none rounded-b-xl"
+              >
+                <td className="py-2 inile-flex">
+                  <span>{data.origin}</span>
+                  <RightArrow />
+                  <span>{data.destination}</span>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </section>
   );
 };
