@@ -13,11 +13,25 @@ const BusList = () => {
   useEffect(() => {
     getBusList().then((res) => setData(res));
   }, []);
-  console.log("DEBUG TAB BUS LIST: ", data);
+
+  const [filter, setFilter] = useState<string>("");
+  const [filtered, setFiltered] = useState<any>([]);
+
+  useEffect(() => {
+    const result = data.filter((item: any) =>
+      item.operator.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    setFiltered(result);
+  }, [filter]);
   return (
     <>
-      <Input placeholder="Cari operator bus..." />
-      <ListBus data={data} />
+      <Input
+        placeholder="Cari operator bus..."
+        value={filter}
+        onChange={(e: any) => setFilter(e.target.value)}
+      />
+      <ListBus data={filter !== "" ? filtered : data} />
     </>
   );
 };
@@ -27,10 +41,25 @@ const StationList = () => {
   useEffect(() => {
     getStationList().then((res) => setData(res));
   }, []);
+
+  const [filter, setFilter] = useState<string>("");
+  const [filtered, setFiltered] = useState<any>([]);
+
+  useEffect(() => {
+    const result = data.filter((item: any) => {
+      const comparator = item.city + " " + item.name;
+      return comparator.toLowerCase().includes(filter.toLowerCase());
+    });
+    setFiltered(result);
+  }, [filter]);
   return (
     <>
-      <Input placeholder="Cari terminal..." />
-      <ListStation data={data} />
+      <Input
+        placeholder="Cari nama terminal atau kota..."
+        value={filter}
+        onChange={(e: any) => setFilter(e.target.value)}
+      />
+      <ListStation data={filter !== "" ? filtered : data} />
     </>
   );
 };
