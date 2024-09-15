@@ -20,8 +20,8 @@ export const ListStation = ({ data }: any) => {
       {data.map((item: any, index: any) => {
         return (
           <section id="item-route" key={item.name} className=" mb-8">
-            <div className="border border-grey-400 rounded-xl bg-gray-100">
-              <div id="terminal-details" className="min-h-24 p-4">
+            <div className="border border-grey-400 rounded-xl bg-gray-100 flex divide-x-2 divide-gray-300 divide-dashed ">
+              <div id="terminal-details" className="min-h-24 p-4 basis-1/2">
                 <a href={item.mapPin} target="_blank">
                   <div className="inline-flex">
                     <p className="font-bold text-xl text-gray-700">
@@ -36,16 +36,16 @@ export const ListStation = ({ data }: any) => {
 
                 <p className="text-gray-500">{item.type}</p>
               </div>
-              <div id="terminal-buttons" className="w-full flex gap-1">
+              <div id="terminal-buttons" className="w-full basis-1/2">
                 <div
                   id="route-list"
-                  className="col-span-1 w-full text-center border border-green-900 bg-green-900 text-white p-2 rounded-bl-md cursor-pointer font-extrabold hover:bg-green-700 hover:border-green-700"
+                  className=" text-center text-gray-500 p-2 rounded-bl-md cursor-pointer font-extrabold"
                   onClick={() => toggleDisplay(index)}
                 >
-                  <p>
+                  <button className="inline-flex bg-orange-600 text-white px-4 py-2 rounded-full mt-6">
                     Trayek Bus
                     <TrayekBus />
-                  </p>
+                  </button>
                 </div>
               </div>
             </div>

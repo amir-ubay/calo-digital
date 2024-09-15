@@ -77,31 +77,31 @@ export const StationRoute = ({ location }: { location: any }) => {
     <section
       id="trayek-list"
       className={clsx(
-        "w-[calc(100%-2rem)] bg-green-100 mx-auto rounded-b-md transition-all",
+        "w-[calc(100%-2rem)] bg-gray-200  p-4 mx-auto rounded-b-md transition-all shadow-lg",
         {
           "h-full, block": true,
           "h-0, hidden": false,
         }
       )}
     >
-      <table className="w-full text-center">
-        <tbody>
+      <table className="w-full text-left text-gray-600 font-bold">
+        <ol className="">
           {data.map((data: any, index: any) => {
             return (
-              <tr
+              <li
                 onClick={() => findRoute(data.origin, data.destination)}
                 key={data.origin + index}
-                className="cursor-pointer hover:text-orange-600 hover:underline border-b border-orange-400 border-dashed last:border-none rounded-b-xl"
+                className="cursor-pointer rounded-b-xl"
               >
-                <td className="py-2 inile-flex">
-                  <span>{data.origin}</span>
+                <p className="py-2 inile-flex hover:text-orange-600">
+                  {index + 1}. <span>{data.origin}</span>
                   <RightArrow />
                   <span>{data.destination}</span>
-                </td>
-              </tr>
+                </p>
+              </li>
             );
           })}
-        </tbody>
+        </ol>
       </table>
     </section>
   );
