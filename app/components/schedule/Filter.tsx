@@ -33,7 +33,7 @@ export const Filter = () => {
         />
       </div>
       <div className="row-span-1">
-        <Select
+        <SelectBus
           value={state.operator}
           onChange={(e) =>
             dispatch({ type: "setOperator", payload: e.target.value })

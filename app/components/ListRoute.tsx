@@ -1,5 +1,5 @@
 import React from "react";
-import { Calendar, PlusMins } from "./Icons";
+import { Calendar, PlusMins, RightArrow } from "./Icons";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
@@ -67,6 +67,13 @@ export const ListRoute = ({
                   className="font-bold text-xl text-gray-500 mt-6"
                 >
                   <PlusMins /> Rp {formatedPrice}
+                </div>
+
+                <div
+                  id="bus-route"
+                  className="font-normal text-lg text-gray-500"
+                >
+                  {origin} <RightArrow /> {destination}
                 </div>
                 <div
                   id="cipped"

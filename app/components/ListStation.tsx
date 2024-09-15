@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { StationRoute } from "./StationRoute";
-import { PinTerminal, TrayekBus } from "./Icons";
+import { PinTerminal, TrayekBus, Route } from "./Icons";
 import { useState } from "react";
 
 export const ListStation = ({ data }: any) => {

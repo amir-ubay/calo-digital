@@ -1,6 +1,6 @@
 "use client";
 import { RouteOptions } from "./RouteOptions";
-import { MapPin, Flag, Rocket } from "./Icons";
+import { MapPin, Flag, Rocket, Pin, Destination } from "./Icons";
 
 export const Select = ({
   value,
@@ -27,8 +27,8 @@ export const Select = ({
         <RouteOptions />
       </select>
       <div className="absolute inset-y-0 left-2 flex items-center mt-6 text-gray-600">
-        {type === "origin" && <MapPin />}
-        {type === "destination" && <Flag />}
+        {type === "origin" && <Pin />}
+        {type === "destination" && <Destination />}
         {type === "operator" && <Rocket />}
       </div>
     </div>
