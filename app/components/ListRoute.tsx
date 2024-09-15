@@ -2,7 +2,6 @@ import React from "react";
 import { Calendar, PlusMins } from "./Icons";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Badge5 } from "./Badges";
 
 export const ListRoute = ({
   operator,
@@ -22,6 +21,12 @@ export const ListRoute = ({
   schedule: any;
 }) => {
   const [formatedPrice, setFormatedPrice] = useState("");
+  const [openSchedule, setOpenSchedule] = useState(false);
+
+  const toogleSchedule = () => {
+    setOpenSchedule(!openSchedule);
+  };
+
   useEffect(() => {
     setFormatedPrice(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
   });
@@ -29,7 +34,7 @@ export const ListRoute = ({
     <>
       <section id="route" className="mt-12">
         <>
-          <div id="item-route" key={operator} className="mb-4">
+          <div id="item-route" key={operator} className="shadow-xl rounded-xl">
             <div className="grid grid-rows-1 grid-cols-2 border border-grey-400 rounded-xl p-4 bg-gray-100 divide-dashed divide-x-2 divide-gray-300 relative">
               <div
                 id="bus-name"
@@ -71,28 +76,33 @@ export const ListRoute = ({
                   id="bus-schedule"
                   className="absolute right-4 bottom-4 bg-orange-600 rounded-full p-1"
                 >
-                  <div
-                    // onClick={() => onClick(item.operator)}
-                    className="cursor-pointer"
-                  >
+                  <div onClick={toogleSchedule} className="cursor-pointer">
                     <Calendar />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div id="schedule-dropdown">
-            <table className="w-full mx-auto">
-              <tbody>
-                {schedule.map((item: any) => (
-                  <tr key={item.busStop + item.time}>
-                    <td className="">{item.busStop}</td>
-                    <td>{item.time}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {openSchedule && (
+            <section
+              id="schedule-dropdown"
+              className="border-2 w-[calc(100%-2rem)] mx-auto -mt-1 shadow-xl"
+            >
+              <table className="w-full mx-auto border-none">
+                <tbody>
+                  {schedule.map((item: any) => (
+                    <tr
+                      key={item.busStop + item.time}
+                      className="odd:bg-gray-100 even:bg-gray-200 text-lg font-bold text-gray-600 last:rounded-b-lg"
+                    >
+                      <td className="p-4">{item.busStop}</td>
+                      <td>{item.time}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          )}
         </>
       </section>
     </>
