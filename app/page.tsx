@@ -15,7 +15,7 @@ export default function Home() {
         <div
           id="bg-city"
           style={style}
-          className="absolute z-10 sm:w-full h-[calc(25vh)] left-0 bg-cover bg-center opacity-10"
+          className="absolute z-10 sm:w-full w-full h-[calc(25vh)] sm:left-0 left-0 bg-cover bg-center opacity-10 "
         ></div>
         {/* Title */}
         <div id="home-title" className="min-h-[calc(5vh)] mb-10 z-20 relative">

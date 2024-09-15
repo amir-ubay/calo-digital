@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
         <BusRouteProvider>
-          <div className="sm:container sm:mx-auto min-h-screen p-8 sm:max-w-md bg-white rounded-2xl relative">
+          <div className="sm:container sm:mx-auto min-h-screen p-8 sm:max-w-screen-sm md:max-w-screen-lg lg:max-w-screen-lg bg-white rounded-2xl relative">
             {children}
           </div>
         </BusRouteProvider>
