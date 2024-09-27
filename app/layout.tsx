@@ -38,9 +38,6 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <Head>
-        <link rel="icon" href="/bus-ico.png" type="image/png" sizes="32x32" />
-      </Head>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-300 min-h-screen`}
