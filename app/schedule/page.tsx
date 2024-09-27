@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { Barier } from "../components/Icons";
 import { HomeButton } from "../components/HomeButton";
 import { Skeleton } from "../components/Skeleton";
+import { Spinner } from "../components/Spinner";
 
 const style = {
   backgroundColor: "#ffffff",
@@ -50,12 +51,14 @@ type ScheduleList = ScheduleData[];
 export default function Page() {
   const [state, dispatch] = useContext(BusRouteContext);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const reSearch = () => {
     // submit manually using state
+    setLoading(true);
     const params = new URLSearchParams(searchParams);
     if (state.origin) {
       params.set("origin", state.origin);
@@ -77,11 +80,13 @@ export default function Page() {
     findBusRoute(state.origin, state.destination, state.operator).then(
       (res) => {
         setData(res);
+        setLoading(false);
       }
     );
   };
 
   useEffect(() => {
+    setLoading(true);
     const origin = searchParams.get("origin");
     const destination = searchParams.get("destination");
     const operator = searchParams.get("operator");
@@ -93,9 +98,11 @@ export default function Page() {
     findBusRoute(origin ?? "", destination ?? "", operator ?? "").then(
       (res) => {
         setData(res);
+        setLoading(false);
       }
     );
   }, [dispatch, searchParams]);
+
   return (
     <>
       <div
@@ -116,7 +123,11 @@ export default function Page() {
           <HomeButton />
         </div>
         <Filter onClick={reSearch} />
-        {data ? (
+        {loading ? (
+          <div className="w-full text-center mt-12">
+            <Skeleton />
+          </div>
+        ) : data ? (
           data.length > 0 ? (
             data.map((item: ScheduleItem, index: number) => (
               <Suspense key={index} fallback={<Skeleton />}>

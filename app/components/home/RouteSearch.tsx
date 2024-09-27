@@ -5,14 +5,33 @@ import { useContext } from "react";
 import { BusRouteContext } from "../../lib/Context";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { WarningToast } from "../Toast";
+import { useState } from "react";
 
 export const RouteSearch = () => {
   const [state, dispatch] = useContext(BusRouteContext);
+  const [error, setError] = useState("");
+  const [displayError, setDisplayError] = useState(false);
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const timeoutError = () => {
+    setDisplayError(true);
+    const timer = setTimeout(() => setDisplayError(false), 5000);
+    return () => clearTimeout(timer);
+  };
+
   const onClick = () => {
-    if (state.origin === state.destination) return null;
+    if (state.origin === state.destination) {
+      setError("Kota keberangkatan dan tujuan harus berbeda");
+      timeoutError();
+      return null;
+    } else if (state.origin === "" && state.destination === "") {
+      setError("Salah satu kota keberangkatan atau tujuan harus diisi");
+      timeoutError();
+      return null;
+    }
     const params = new URLSearchParams(searchParams);
     params.set("origin", state.origin);
     params.set("destination", state.destination);
@@ -41,6 +60,7 @@ export const RouteSearch = () => {
       />
 
       <Button onClick={onClick} label="Cari Jadwal" />
+      <WarningToast message={error} display={displayError} />
     </>
   );
 };

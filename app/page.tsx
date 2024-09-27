@@ -22,6 +22,9 @@ export default function Home() {
           <h1 className="text-4xl font-extrabold text-left p-4 text-gray-600">
             Calo Digital
           </h1>
+          <h2 className="text-2xl font-thins text-left px-4 pb-6 text-gray-600">
+            Cari dan cek jadwal, terminal, dan operator bus
+          </h2>
         </div>
         {/* Route Search */}
         <div

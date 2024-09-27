@@ -10,7 +10,7 @@ export const Tab = ({
   return (
     <div>
       <nav
-        className="flex gap-x-1 border-b-2 border-dashed border-orange-600 mb-10"
+        className="flex gap-x-1"
         aria-label="Tabs"
         role="tablist"
         aria-orientation="horizontal"
@@ -39,7 +39,7 @@ export const Tab = ({
         </button>
       </nav>
 
-      <div className="mt-3">
+      <div className="p-4 border-2 rounded-b-2xl">
         <div
           id="equal-width-elements-1"
           role="tabpanel"
