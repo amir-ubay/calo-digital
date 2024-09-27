@@ -37,6 +37,8 @@ export const ListBus = ({ data }: ListBusProps) => {
   const searchParams = useSearchParams();
 
   const onClick = (operator: string) => {
+    dispatch({ type: "setDestination", payload: "" });
+    dispatch({ type: "setOrigin", payload: "" });
     dispatch({ type: "setOperator", payload: operator });
     const params = new URLSearchParams(searchParams);
     params.set("operator", operator);
@@ -47,10 +49,10 @@ export const ListBus = ({ data }: ListBusProps) => {
       {data.map((item: BusData) => {
         return (
           <div id="item-route" key={item._id} className="mb-4">
-            <div className="grid grid-rows-1 grid-cols-2 border border-grey-400 rounded-xl p-4 bg-gray-100 divide-x-2 divide-dashed divide-gray-300 relative">
+            <div className="grid md:grid-rows-1 md:grid-cols-2 sm:grid-rows-2 sm:grid-cols-1 border border-grey-400 rounded-xl p-4 bg-gray-100 md:divide-x-2 md:divide-dashed md:divide-gray-300 gap-0 divide-y-2 md:divide-y-0 divide-dashed divide-gray-300 relative">
               <div
                 id="bus-name"
-                className="row-span-1 col-span-1 justify-self-center content-center"
+                className="md:row-span-1 md:col-span-1 justify-self-center content-center md:mb-0"
               >
                 <div id="bus-logo">
                   {item.logo && (
@@ -69,7 +71,7 @@ export const ListBus = ({ data }: ListBusProps) => {
               </div>
               <div
                 id="bus-class"
-                className="row-span-1 col-span-1 justify-self-center text-left w-full pl-8 "
+                className="md:row-span-1 md:col-span-1 justify-self-center md:text-left text-center w-full md:pl-8 p-8 "
               >
                 <div id="bus-class-item">
                   {item.busClass?.map((n: string, index: number) => {

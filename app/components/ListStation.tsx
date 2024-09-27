@@ -34,8 +34,11 @@ const ItemStation = ({ item }: { item: StationData }) => {
 
   return (
     <section id="item-route" key={item.name} className=" mb-8">
-      <div className="border border-grey-400 rounded-xl bg-gray-100 flex divide-x-2 divide-gray-300 divide-dashed ">
-        <div id="terminal-details" className="min-h-24 p-4 basis-1/2">
+      <div className="border border-grey-400 rounded-xl bg-gray-100 flex flex-col md:flex-row md:divide-x-2 md:divide-y-0 divide-y-2 divide-gray-300 divide-dashed ">
+        <div
+          id="terminal-details"
+          className="min-h-24 md:p-4 p-2 text-center md:text-left basis-1/2"
+        >
           <a href={item.mapPin} target="_blank">
             <div className="inline-flex">
               <p className="font-bold text-xl text-gray-700">
@@ -56,7 +59,7 @@ const ItemStation = ({ item }: { item: StationData }) => {
             className=" text-center text-gray-500 p-2 rounded-bl-md cursor-pointer font-extrabold"
             onClick={toggleDisplay}
           >
-            <button className="inline-flex bg-orange-600 text-white px-4 py-2 rounded-full mt-6">
+            <button className="inline-flex bg-orange-600 text-white px-4 py-2 rounded-full md:mt-6">
               Trayek Bus
               <TrayekBus />
             </button>

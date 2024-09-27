@@ -52,7 +52,7 @@ export const ListRoute = ({
       <section id="route" className="mt-12">
         <>
           <div id="item-route" key={operator} className="rounded-xl">
-            <div className="grid grid-rows-1 grid-cols-2 border border-grey-400 rounded-xl p-4 bg-gray-100 divide-dashed divide-x-2 divide-gray-300 relative">
+            <div className="grid md:grid-rows-1 md:grid-cols-2 grid-rows-2 border border-grey-400 rounded-xl md:p-4 p-1 bg-gray-100 divide-dashed md:divide-x-2 md:divide-y-0 divide-y-2 divide-gray-300 relative">
               <div
                 id="bus-name"
                 className="row-span-1 col-span-1 justify-self-center content-center"
@@ -69,28 +69,32 @@ export const ListRoute = ({
               </div>
               <div
                 id="bus-class"
-                className="row-span-1 col-span-1 text-left w-full ml-5 pl-6"
+                className="row-span-1 col-span-1 md:text-left w-full md:pl-6 text-center md:p-0 p-1"
               >
-                <div id="operator" className="font-bold text-2xl text-gray-600">
+                <div
+                  id="operator"
+                  className="font-bold md:text-2xl text-lg text-gray-600"
+                >
                   {operator}
                 </div>
                 <div>
-                  <span className="text-gray-600 font-normal text-xl">
+                  <span className="text-gray-600 font-normal md:text-xl text-md">
                     {busClass}
                   </span>
                 </div>
                 <div
                   id="bus-price"
-                  className="font-bold text-xl text-gray-500 mt-6"
+                  className="font-bold md:text-xl text-md text-gray-500 md:mt-6"
                 >
-                  <PlusMins /> Rp {formatedPrice}
+                  Rp {formatedPrice} <PlusMins />
                 </div>
 
                 <div
                   id="bus-route"
-                  className="font-normal text-lg text-gray-500"
+                  className="font-bold md:text-lg text-md text-gray-500"
                 >
-                  {origin} <RightArrow /> {destination}
+                  <span className="text-red-500">{origin}</span> <RightArrow />{" "}
+                  <span className="text-emerald-500">{destination}</span>
                 </div>
                 <div
                   id="cipped"
@@ -98,7 +102,7 @@ export const ListRoute = ({
                 ></div>
                 <div
                   id="bus-schedule"
-                  className="absolute right-4 bottom-4 bg-orange-600 rounded-full p-1"
+                  className="absolute md:-right-4 md:bottom-1/2 -right-4 bottom-1/2 transform translate-y-1/2 bg-orange-600 rounded-full p-1"
                 >
                   <div onClick={toogleSchedule} className="cursor-pointer">
                     <Calendar />
@@ -117,10 +121,10 @@ export const ListRoute = ({
                   {schedule.map((item: ScheduleData) => (
                     <tr
                       key={item.busStop + item.time}
-                      className="odd:bg-gray-100 even:bg-gray-200 text-lg font-bold text-gray-600 last:rounded-b-lg"
+                      className="odd:bg-gray-100 even:bg-gray-200 md:text-lg text-sm font-bold text-gray-600 last:rounded-b-lg"
                     >
-                      <td className="p-4 w-1/2">{item.busStop}</td>
-                      <td className="p-4 w-1/2">{item.time}</td>
+                      <td className="p-4 w-1/2 text-right">{item.busStop}</td>
+                      <td className="p-4 w-1/2 text-left">{item.time}</td>
                     </tr>
                   ))}
                 </tbody>
