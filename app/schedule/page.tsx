@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { Barier } from "../components/Icons";
 import { HomeButton } from "../components/HomeButton";
 import { Skeleton } from "../components/Skeleton";
-import { Spinner } from "../components/Spinner";
 
 const style = {
   backgroundColor: "#ffffff",
