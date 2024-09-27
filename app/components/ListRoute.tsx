@@ -33,10 +33,6 @@ export const ListRoute = ({
   destination,
   price,
   schedule,
-  addressAgent,
-  busAgent,
-  mapAgent,
-  phoneAgent,
 }: {
   operator: string;
   busClass: string;
@@ -45,10 +41,6 @@ export const ListRoute = ({
   destination: string;
   price: number;
   schedule: ScheduleList;
-  addressAgent: string;
-  busAgent: string;
-  mapAgent: string;
-  phoneAgent: string;
 }) => {
   const [formatedPrice, setFormatedPrice] = useState("");
   const [openSchedule, setOpenSchedule] = useState(false);
