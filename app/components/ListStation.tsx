@@ -59,7 +59,7 @@ const ItemStation = ({ item }: { item: StationData }) => {
             className=" text-center text-gray-500 p-2 rounded-bl-md cursor-pointer font-extrabold"
             onClick={toggleDisplay}
           >
-            <button className="inline-flex bg-orange-600 text-white px-4 py-2 rounded-full md:mt-6">
+            <button className="inline-flex bg-orange-600 text-white pl-4 pt-2 pb-2 rounded-full md:mt-6">
               Trayek Bus
               <TrayekBus />
             </button>
