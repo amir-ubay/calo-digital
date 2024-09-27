@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import PrelineScript from "./components/PrelineScript";
 import { BusRouteProvider } from "./lib/Context";
+import { Footer } from "./components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Calo Digital",
-  description: "Cari Jadwal Bus | Project By Amir Ubaidillah",
+  title: "Calo Digital | Cari Jadwal Bus",
+  description: "Bus Schedule Listing | Project By Amir Ubaidillah",
 };
 
 export default function RootLayout({
@@ -28,13 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-300`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-300 min-h-screen`}
       >
-        <BusRouteProvider>
-          <div className="sm:container sm:mx-auto min-h-screen p-8 sm:max-w-screen-sm md:max-w-screen-lg lg:max-w-screen-lg bg-white relative">
-            {children}
-          </div>
-        </BusRouteProvider>
+        <div className="sm:container sm:mx-auto min-h-screen p-8 sm:max-w-screen-sm md:max-w-screen-lg lg:max-w-screen-lg bg-white relative">
+          <BusRouteProvider>{children}</BusRouteProvider>
+        </div>
+        <Footer />
       </body>
       <PrelineScript />
     </html>

@@ -85,7 +85,7 @@ const StationList = () => {
 
 export const Listing = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <Tab operator={<BusList />} station={<StationList />} />
     </div>
   );
