@@ -14,7 +14,7 @@ interface BusRoute {
 }
 
 export const getBusRoute = async () => {
-  const query = `*[_type == "busRoute" ]{"operator": name->name,"busClass": busClass->name, "origin": origin->name, "destination": destination->name, price,"schedules": schedule[]{"busStop":busStop->name, time}}`;
+  const query = `*[_type == "busRoute" ]{"operator": name->name,"busClass": busClass->name, "origin": origin->name, "destination": destination->name, price,"schedules": schedule[]{"busStop":busStop->name, time, "busAgent": agent->name, "phoneAgent": agent->phone, "addressAgent": agent->address, "mapAgent": agent->pinMap}}`;
 
   return await client
     .fetch(
@@ -34,7 +34,7 @@ export const findBusRoute = async (
   destination: string,
   operator: string
 ) => {
-  const query = `*[_type == "busRoute"]{_id,"operator": name->name,"busClass": busClass->name, "logo": name->logo.asset->url, "origin": origin->name, "destination": destination->name, price,"schedules": schedule[]{"busStop":busStop->name, time}}`;
+  const query = `*[_type == "busRoute"]{_id,"operator": name->name,"busClass": busClass->name, "logo": name->logo.asset->url, "origin": origin->name, "destination": destination->name, price,"schedules": schedule[]{"busStop":busStop->name, time, "busAgent": agent->name, "phoneAgent": agent->phone, "addressAgent": agent->address, "mapAgent": agent->pinMap}}`;
   return await client.fetch(query, {}, { cache: "no-store" }).then((res) => {
     if (operator) {
       return res.filter((item: BusRoute) => item.operator == operator);

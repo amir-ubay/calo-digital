@@ -2,6 +2,7 @@ import React from "react";
 import { Calendar, PlusMins, RightArrow } from "./Icons";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { AgentDetails } from "./schedule/AgentDetails";
 
 interface ScheduleData {
   _id: string;
@@ -16,6 +17,10 @@ interface ScheduleData {
   price: number;
   schedules: string;
   busStop: string;
+  addressAgent: string;
+  busAgent: string;
+  mapAgent: string;
+  phoneAgent: string;
 }
 
 type ScheduleList = ScheduleData[];
@@ -28,6 +33,10 @@ export const ListRoute = ({
   destination,
   price,
   schedule,
+  addressAgent,
+  busAgent,
+  mapAgent,
+  phoneAgent,
 }: {
   operator: string;
   busClass: string;
@@ -36,6 +45,10 @@ export const ListRoute = ({
   destination: string;
   price: number;
   schedule: ScheduleList;
+  addressAgent: string;
+  busAgent: string;
+  mapAgent: string;
+  phoneAgent: string;
 }) => {
   const [formatedPrice, setFormatedPrice] = useState("");
   const [openSchedule, setOpenSchedule] = useState(false);
@@ -124,7 +137,15 @@ export const ListRoute = ({
                       className="odd:bg-gray-100 even:bg-gray-200 md:text-lg text-sm font-bold text-gray-600 last:rounded-b-lg"
                     >
                       <td className="p-4 w-1/2 text-right">{item.busStop}</td>
-                      <td className="p-4 w-1/2 text-left">{item.time}</td>
+                      <td className="p-4 w-1/2 text-center">{item.time}</td>
+                      <td className="p-4 w-1/2 text-center">
+                        <AgentDetails
+                          name={item.busAgent}
+                          address={item.addressAgent}
+                          phone={item.phoneAgent}
+                          pinMap={item.mapAgent}
+                        />
+                      </td>
                     </tr>
                   ))}
                 </tbody>

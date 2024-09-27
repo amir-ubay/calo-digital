@@ -28,6 +28,10 @@ interface ScheduleItem {
   destination: string;
   price: number;
   schedules: ScheduleList;
+  addressAgent: string;
+  busAgent: string;
+  mapAgent: string;
+  phoneAgent: string;
 }
 
 interface ScheduleData {
@@ -43,6 +47,10 @@ interface ScheduleData {
   price: number;
   schedules: string;
   busStop: string;
+  addressAgent: string;
+  busAgent: string;
+  mapAgent: string;
+  phoneAgent: string;
 }
 
 type ScheduleList = ScheduleData[];
@@ -78,6 +86,7 @@ export default function Page() {
     router.refresh();
     findBusRoute(state.origin, state.destination, state.operator).then(
       (res) => {
+        console.log("DEBUG: ", res);
         setData(res);
         setLoading(false);
       }
@@ -139,6 +148,10 @@ export default function Page() {
                   destination={item.destination}
                   price={item.price}
                   schedule={item.schedules}
+                  addressAgent={item.addressAgent}
+                  busAgent={item.busAgent}
+                  mapAgent={item.mapAgent}
+                  phoneAgent={item.phoneAgent}
                 />
               </Suspense>
             ))
