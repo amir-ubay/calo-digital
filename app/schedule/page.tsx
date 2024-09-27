@@ -148,10 +148,6 @@ export default function Page() {
                   destination={item.destination}
                   price={item.price}
                   schedule={item.schedules}
-                  addressAgent={item.addressAgent}
-                  busAgent={item.busAgent}
-                  mapAgent={item.mapAgent}
-                  phoneAgent={item.phoneAgent}
                 />
               </Suspense>
             ))
