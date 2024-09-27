@@ -1,4 +1,12 @@
-export const Input = ({ placeholder, value, onChange }: any) => {
+export const Input = ({
+  placeholder,
+  value,
+  onChange,
+}: {
+  placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) => {
   return (
     <div className="max-w-sm space-y-3 mb-6">
       <input

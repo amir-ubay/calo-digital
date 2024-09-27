@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Image from "next/image";
 import { useContext } from "react";
 import { BusRouteContext } from "../lib/Context";
@@ -7,12 +6,37 @@ import { Badge1, Badge2, Badge3, Badge4, Badge5, Badge6 } from "./Badges";
 import { Calendar } from "./Icons";
 import { useSearchParams } from "next/navigation";
 
-export const ListBus = ({ data }: any) => {
+interface ListBusProps {
+  data: BusData[];
+}
+
+interface BusData {
+  _id: string;
+  operator: string;
+  logo: string;
+  busClass: string[];
+}
+
+interface BusRouteContext {
+  state: BusRouteState;
+  dispatch: (action: BusRouteAction) => void;
+}
+
+interface BusRouteState {
+  // Add properties to this interface as needed
+}
+
+interface BusRouteAction {
+  type: string;
+  payload: string;
+}
+
+export const ListBus = ({ data }: ListBusProps) => {
   const router = useRouter();
-  const [state, dispatch] = useContext(BusRouteContext);
+  const [, dispatch] = useContext(BusRouteContext);
   const searchParams = useSearchParams();
 
-  const onClick = (operator: any) => {
+  const onClick = (operator: string) => {
     dispatch({ type: "setOperator", payload: operator });
     const params = new URLSearchParams(searchParams);
     params.set("operator", operator);
@@ -20,7 +44,7 @@ export const ListBus = ({ data }: any) => {
   };
   return (
     <>
-      {data.map((item: any) => {
+      {data.map((item: BusData) => {
         return (
           <div id="item-route" key={item._id} className="mb-4">
             <div className="grid grid-rows-1 grid-cols-2 border border-grey-400 rounded-xl p-4 bg-gray-100 divide-x-2 divide-dashed divide-gray-300 relative">
@@ -48,20 +72,18 @@ export const ListBus = ({ data }: any) => {
                 className="row-span-1 col-span-1 justify-self-center text-left w-full pl-8 "
               >
                 <div id="bus-class-item">
-                  {item.busClass?.map(
-                    (n: any, index: number, arr: Array<any>) => {
-                      return (
-                        <div className=" mr-2 mb-2">
-                          {index === 0 && <Badge1 key={index + n} label={n} />}
-                          {index === 1 && <Badge2 key={index + n} label={n} />}
-                          {index === 2 && <Badge3 key={index + n} label={n} />}
-                          {index === 3 && <Badge4 key={index + n} label={n} />}
-                          {index === 4 && <Badge5 key={index + n} label={n} />}
-                          {index === 5 && <Badge6 key={index + n} label={n} />}
-                        </div>
-                      );
-                    }
-                  )}
+                  {item.busClass?.map((n: string, index: number) => {
+                    return (
+                      <div className=" mr-2 mb-2" key={index + n}>
+                        {index === 0 && <Badge1 key={index + n} label={n} />}
+                        {index === 1 && <Badge2 key={index + n} label={n} />}
+                        {index === 2 && <Badge3 key={index + n} label={n} />}
+                        {index === 3 && <Badge4 key={index + n} label={n} />}
+                        {index === 4 && <Badge5 key={index + n} label={n} />}
+                        {index === 5 && <Badge6 key={index + n} label={n} />}
+                      </div>
+                    );
+                  })}
                 </div>
                 <div
                   id="cipped"

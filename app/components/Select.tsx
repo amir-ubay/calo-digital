@@ -1,6 +1,6 @@
 "use client";
 import { RouteOptions } from "./RouteOptions";
-import { MapPin, Flag, Rocket, Pin, Destination } from "./Icons";
+import { Rocket, Pin, Destination } from "./Icons";
 
 export const Select = ({
   value,
@@ -10,7 +10,7 @@ export const Select = ({
   type,
 }: {
   value: string;
-  onChange: (e: any) => void;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder: string;
   label: string;
   type: "origin" | "destination" | "operator";

@@ -7,13 +7,11 @@ const client = createClient({
   useCdn: false,
 });
 
-const getBusname = async () => {
-  const query = `*[_type == "busName"]`;
-  const params = {};
-  return await client.fetch(query, {}, { cache: "no-store" });
-};
-
-// && destination._ref == 'b7bcc005-7c24-4d7e-89df-36aec6765796'
+interface BusRoute {
+  operator: string;
+  origin: string;
+  destination: string;
+}
 
 export const getBusRoute = async () => {
   const query = `*[_type == "busRoute" ]{"operator": name->name,"busClass": busClass->name, "origin": origin->name, "destination": destination->name, price,"schedules": schedule[]{"busStop":busStop->name, time}}`;
@@ -26,29 +24,32 @@ export const getBusRoute = async () => {
         cache: "no-store",
       }
     )
-    .then((res) => res.filter((item: any) => item.destination == "Malang"));
+    .then((res) =>
+      res.filter((item: BusRoute) => item.destination == "Malang")
+    );
 };
 
 export const findBusRoute = async (
-  origin: any,
-  destination: any,
-  operator: any
+  origin: string,
+  destination: string,
+  operator: string
 ) => {
   const query = `*[_type == "busRoute"]{_id,"operator": name->name,"busClass": busClass->name, "logo": name->logo.asset->url, "origin": origin->name, "destination": destination->name, price,"schedules": schedule[]{"busStop":busStop->name, time}}`;
   return await client.fetch(query, {}, { cache: "no-store" }).then((res) => {
     if (operator) {
-      return res.filter((item: any) => item.operator == operator);
+      return res.filter((item: BusRoute) => item.operator == operator);
     } else if (origin && !destination) {
-      return res.filter((item: any) => item.origin == origin);
+      return res.filter((item: BusRoute) => item.origin == origin);
     } else if (!origin && destination) {
-      return res.filter((item: any) => item.destination == destination);
+      return res.filter((item: BusRoute) => item.destination == destination);
     } else if (origin && destination) {
       return res.filter(
-        (item: any) => item.origin == origin && item.destination == destination
+        (item: BusRoute) =>
+          item.origin == origin && item.destination == destination
       );
     } else if (origin && origin && destination) {
       return res.filter(
-        (item: any) =>
+        (item: BusRoute) =>
           item.origin == origin &&
           item.destination == destination &&
           item.operator == operator

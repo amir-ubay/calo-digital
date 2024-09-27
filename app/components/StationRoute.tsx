@@ -8,22 +8,28 @@ import { RightArrow } from "./Icons";
 import { clsx } from "clsx";
 import { useSearchParams } from "next/navigation";
 
+interface BusRoute {
+  origin: string;
+  destination: string;
+  operator: string;
+}
+
 export const StationRoute = ({
   location,
   display,
 }: {
-  location: any;
+  location: string;
   display: boolean;
 }) => {
-  const [fromData, setFromData] = useState<any>([]);
-  const [toData, setToData] = useState<any>([]);
-  const [data, setData] = useState<any>([]);
+  const [fromData, setFromData] = useState([]);
+  const [toData, setToData] = useState([]);
+  const [data, setData] = useState([]);
 
-  const [state, dispatch] = useContext(BusRouteContext);
+  const [, dispatch] = useContext(BusRouteContext);
   const userouter = useRouter();
   const searchParams = useSearchParams();
 
-  const findRoute = (origin: any, destination: any) => {
+  const findRoute = (origin: string, destination: string) => {
     dispatch({ type: "setOrigin", payload: origin });
     dispatch({ type: "setDestination", payload: destination });
     const params = new URLSearchParams(searchParams);
@@ -34,52 +40,52 @@ export const StationRoute = ({
   // get route
   useEffect(() => {
     findBusRoute(location, "", "").then((res) => {
-      const filtered = res.map((item: any) => {
+      const filtered = res.map((item: BusRoute) => {
         return {
           origin: item.origin,
           destination: item.destination,
         };
       });
 
-      const uniqueData = filtered.filter((item: any, index: any, self: any) => {
-        // Create a key string based on origin and destination
-        const key = `${item.origin}-${item.destination}`;
+      const uniqueData = filtered.filter(
+        (item: BusRoute, index: number, self: BusRoute[]) => {
+          // Create a key string based on origin and destination
+          const key = `${item.origin}-${item.destination}`;
 
-        // Check if this key already exists in the array up to the current item
-        return (
-          index ===
-          self.findIndex(
-            (obj: any) => `${obj.origin}-${obj.destination}` === key
-          )
-        );
-      });
+          // Check if this key already exists in the array up to the current item
+          return (
+            index ===
+            self.findIndex((obj) => `${obj.origin}-${obj.destination}` === key)
+          );
+        }
+      );
 
       setFromData(uniqueData);
     });
     findBusRoute("", location, "").then((res) => {
-      const filtered = res.map((item: any) => {
+      const filtered = res.map((item: BusRoute) => {
         return {
           origin: item.origin,
           destination: item.destination,
         };
       });
 
-      const uniqueData = filtered.filter((item: any, index: any, self: any) => {
-        // Create a key string based on origin and destination
-        const key = `${item.origin}-${item.destination}`;
+      const uniqueData = filtered.filter(
+        (item: BusRoute, index: number, self: BusRoute[]) => {
+          // Create a key string based on origin and destination
+          const key = `${item.origin}-${item.destination}`;
 
-        // Check if this key already exists in the array up to the current item
-        return (
-          index ===
-          self.findIndex(
-            (obj: any) => `${obj.origin}-${obj.destination}` === key
-          )
-        );
-      });
+          // Check if this key already exists in the array up to the current item
+          return (
+            index ===
+            self.findIndex((obj) => `${obj.origin}-${obj.destination}` === key)
+          );
+        }
+      );
 
       setToData(uniqueData);
     });
-  }, []);
+  }, [location]);
   // Combine data
   useEffect(() => {
     setData([...fromData, ...toData]);
@@ -95,9 +101,9 @@ export const StationRoute = ({
         }
       )}
     >
-      <table className="w-full text-left text-gray-600 font-bold">
+      <section className="w-full text-left text-gray-600 font-bold">
         <ol className="">
-          {data.map((data: any, index: any) => {
+          {data.map((data: BusRoute, index: number) => {
             return (
               <li
                 onClick={() => findRoute(data.origin, data.destination)}
@@ -113,7 +119,7 @@ export const StationRoute = ({
             );
           })}
         </ol>
-      </table>
+      </section>
     </section>
   );
 };

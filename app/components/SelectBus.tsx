@@ -1,7 +1,6 @@
 "use client";
 import { BusOptions } from "./BusOptions";
-import { RouteOptions } from "./RouteOptions";
-import { MapPin, Flag, Rocket, Bus } from "./Icons";
+import { MapPin, Flag, Bus } from "./Icons";
 
 export const SelectBus = ({
   value,
@@ -11,7 +10,7 @@ export const SelectBus = ({
   type,
 }: {
   value: string;
-  onChange: (e: any) => void;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder: string;
   label: string;
   type: "origin" | "destination" | "operator";

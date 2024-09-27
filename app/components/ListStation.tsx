@@ -1,30 +1,31 @@
 "use client";
 import React from "react";
 import { StationRoute } from "./StationRoute";
-import { PinTerminal, TrayekBus, Route } from "./Icons";
+import { PinTerminal, TrayekBus } from "./Icons";
 import { useState } from "react";
 
-export const ListStation = ({ data }: any) => {
-  const [display, setDisplay] = useState(null);
+interface StationData {
+  _id: string;
+  name: string;
+  city: string;
+  address: string;
+  mapPin: string;
+  type: string;
+}
 
-  const toggleDisplay = (item: any) => {
-    if (display === item) {
-      setDisplay(null);
-    } else {
-      setDisplay(item);
-    }
-  };
+type StationList = StationData[];
 
+export const ListStation = ({ data }: { data: StationList }) => {
   return (
     <>
-      {data.map((item: any, index: any) => {
+      {data.map((item: StationData, index: number) => {
         return <ItemStation key={index} item={item} />;
       })}
     </>
   );
 };
 
-const ItemStation = ({ item }: { item: any }) => {
+const ItemStation = ({ item }: { item: StationData }) => {
   const [display, setDisplay] = useState(false);
 
   const toggleDisplay = () => {

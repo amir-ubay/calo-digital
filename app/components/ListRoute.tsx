@@ -3,6 +3,23 @@ import { Calendar, PlusMins, RightArrow } from "./Icons";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
+interface ScheduleData {
+  _id: string;
+  busClass: string;
+  date: string;
+  route: string;
+  time: string;
+  operator: string;
+  logo: string;
+  origin: string;
+  destination: string;
+  price: number;
+  schedules: string;
+  busStop: string;
+}
+
+type ScheduleList = ScheduleData[];
+
 export const ListRoute = ({
   operator,
   busClass,
@@ -18,7 +35,7 @@ export const ListRoute = ({
   origin: string;
   destination: string;
   price: number;
-  schedule: any;
+  schedule: ScheduleList;
 }) => {
   const [formatedPrice, setFormatedPrice] = useState("");
   const [openSchedule, setOpenSchedule] = useState(false);
@@ -29,7 +46,7 @@ export const ListRoute = ({
 
   useEffect(() => {
     setFormatedPrice(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-  });
+  }, [price]);
   return (
     <>
       <section id="route" className="mt-12">
@@ -97,7 +114,7 @@ export const ListRoute = ({
             >
               <table className="w-full mx-auto border-none">
                 <tbody>
-                  {schedule.map((item: any) => (
+                  {schedule.map((item: ScheduleData) => (
                     <tr
                       key={item.busStop + item.time}
                       className="odd:bg-gray-100 even:bg-gray-200 text-lg font-bold text-gray-600 last:rounded-b-lg"

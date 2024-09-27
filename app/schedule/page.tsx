@@ -4,11 +4,10 @@ import { Suspense, useContext } from "react";
 import { BusRouteContext } from "../lib/Context";
 import { useState, useEffect } from "react";
 import { findBusRoute } from "../lib/data";
-import { BackButton } from "../components/BackButton";
 import { Filter } from "../components/schedule/Filter";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Barier, Home } from "../components/Icons";
+import { Barier } from "../components/Icons";
 import { HomeButton } from "../components/HomeButton";
 import { Skeleton } from "../components/Skeleton";
 
@@ -17,11 +16,40 @@ const style = {
   backgroundImage: `url("./bg-city.jpg")`,
 };
 
+interface ScheduleItem {
+  _id: string;
+  busClass: string;
+  date: string;
+  route: string;
+  time: string;
+  operator: string;
+  logo: string;
+  origin: string;
+  destination: string;
+  price: number;
+  schedules: ScheduleList;
+}
+
+interface ScheduleData {
+  _id: string;
+  busClass: string;
+  date: string;
+  route: string;
+  time: string;
+  operator: string;
+  logo: string;
+  origin: string;
+  destination: string;
+  price: number;
+  schedules: string;
+  busStop: string;
+}
+
+type ScheduleList = ScheduleData[];
+
 export default function Page() {
   const [state, dispatch] = useContext(BusRouteContext);
-  const [data, setData] = useState<any>([]);
-  const [query, setQuery] = useState<any>({});
-  const [reFetch, setReFetch] = useState(false);
+  const [data, setData] = useState([]);
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -54,7 +82,6 @@ export default function Page() {
   };
 
   useEffect(() => {
-    // get parameter from query
     const origin = searchParams.get("origin");
     const destination = searchParams.get("destination");
     const operator = searchParams.get("operator");
@@ -63,12 +90,12 @@ export default function Page() {
     if (destination) dispatch({ type: "setDestination", payload: destination });
     if (operator) dispatch({ type: "setOperator", payload: operator });
 
-    console.log("DEBUG: ", origin, destination, operator);
-    findBusRoute(origin, destination, operator).then((res) => {
-      setData(res);
-    });
-  }, []);
-  console.log("MAIN DATA, ", data);
+    findBusRoute(origin ?? "", destination ?? "", operator ?? "").then(
+      (res) => {
+        setData(res);
+      }
+    );
+  }, [dispatch, searchParams]);
   return (
     <>
       <div
@@ -91,7 +118,7 @@ export default function Page() {
         <Filter onClick={reSearch} />
         {data ? (
           data.length > 0 ? (
-            data.map((item: any, index: number, arr: Array<any>) => (
+            data.map((item: ScheduleItem, index: number) => (
               <Suspense key={index} fallback={<Skeleton />}>
                 <ListRoute
                   key={item._id}
